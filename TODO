@@ -1,0 +1,7 @@
+
+TODO List for Convert::Wiki.
+
+* add txt input filtering
+* add lists, indended paragraphs, monospaced (pre)
+* add a testsuite with various examples
+

@@ -1,0 +1,42 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.42.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+
+SHA1 345cfe9e537d7ac8bb358b5d5741e6f343fc844b CHANGES
+SHA1 d6a6c30ee6d9ba6b9afab8bbf6a25e1b23c744e0 LICENSE
+SHA1 5e65fea44e65270c7b19daa4569ce230b10c64f3 MANIFEST
+SHA1 1dbcbacb95560bcd7860ff525061473e9aae9396 META.yml
+SHA1 a1347831131aa47f9574f176b4d4359d63b5a6d7 Makefile.PL
+SHA1 8adc06ba3bed509f3043d2dd4e3956c38e822aef README
+SHA1 1a8d393500da1b7c40afa8f823949376da4b72ff TODO
+SHA1 01bdcbf1a7fdf92a4500acabeaf9ef28185daf75 examples/txt2wiki
+SHA1 b46b30ef794eb2944f00a0a1b4b8ba95e5494db0 lib/Convert/Wiki.pm
+SHA1 06473a4bd67e3d34a87b968340285f8789e6121b lib/Convert/Wiki/Node.pm
+SHA1 1b3ce34b696f213a7107e8916eb592a5bf5cce7b lib/Convert/Wiki/Node/Head.pm
+SHA1 fee761cb174a0709efc24fc21d81adbdc498efb0 lib/Convert/Wiki/Node/Para.pm
+SHA1 ba99d667da77cec4d2d95f116bd193e3d6d449a3 t/head.t
+SHA1 11550c1dd559dfda1a3576badb08f16c3ebffb42 t/node.t
+SHA1 129320047f4b98490be70d8cfc9fb2c3dc28e6fe t/para.t
+SHA1 bb7e7f732c9a6b55f5ad359cf40377852aecc7f7 t/wikipm.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.2.4 (GNU/Linux)
+
+iQEVAwUBQcwI53cLPEOTuEwVAQGyEwf/TbGlojGPbijbx+b2H1lQIFHhz6HDzaZO
+gV/RDZEr9YmM0tWK34WbOIL5tpu2KQzu40mCef0kTrYim5johko4J9An9MeLj/LA
+g/L2TZ+Y2EzJg0zz5c4HJK2nhRa4zWAqTq/aHFnlMr/ig163mHN3wx4F4So4Lbsr
+lWZK5DieStSHWiSm86zjnN7setREizxjZlY6cW6Y9e2uoxNOiTjneT2IK6h8f41T
+g8vSaTnyDiJXzLdJAis5IEaqICrz6uZlCUc/B4pNzNLdf8vBlpFA0Vtpi7V0eSgT
+SO6RLRTOVOvzXdY/bQVlp6eCzZWZbkjPvHf+ZAolNZJTVh65zRBahA==
+=cu0j
+-----END PGP SIGNATURE-----

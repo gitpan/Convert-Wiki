@@ -1,0 +1,8 @@
+Revision history for Perl extension Convert::Wiki.
+
+2004-12-24 v0.01 Tels 22 tests
+  * original version; created by h2xs 1.23 with options
+    --force -A -X -n Convert::Wiki -b 5.6.1 --skip-autoloader
+  * basicobject/code structure and layout is there, plus tests and some doc
+  * examples/txt2wiki
+

@@ -1,0 +1,17 @@
+#!/usr/bin/perl -w
+
+BEGIN
+  {
+  use lib '../lib';			# if run with module not yet installed
+  $|++;					# buffer off
+  }
+
+use Convert::Wiki;
+
+my $cvt = Convert::Wiki->new();		# create conversion object
+
+local $/ = undef;			# slurp mode
+$cvt->from_txt( <> );			# read in input from stdin
+print $cvt->as_wiki();			# output converted text
+
+print STDERR "txt2wiki error: " . $cvt->error() if $cvt->error();
