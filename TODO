@@ -15,4 +15,3 @@ TODO List for Convert::Wiki:
  
   will turn "foobar" into "[[Foo|foobar]]" and then this into
   "[[Foo|foo[[bar]]]]" - ugh.
-* interlinking will not catch phrases that span linebreaks

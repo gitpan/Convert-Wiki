@@ -11,14 +11,23 @@ use strict;
 use warnings;
 
 use Convert::Wiki::Node;
+use Text::Format;
 
-use vars qw/$VERSION @ISA/;
+use vars qw/$VERSION @ISA $formatter/;
 
 @ISA = qw/Convert::Wiki::Node/;
 
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 #############################################################################
+
+BEGIN
+  {
+  $formatter= Text::Format->new( { 
+    columns => 76,
+    firstIndent => 0,
+    } );
+  }
 
 sub _init
   {
@@ -26,9 +35,19 @@ sub _init
 
   $self->SUPER::_init($args);
 
-  $self->{txt} .= "\n\n";
+  $self->{txt} =~ s/\n/ /g;	# remove all newlines
 
   $self;
+  }
+
+sub _as_wiki
+  {
+  my ($self,$txt) = @_;
+
+  $txt = $formatter->format($txt);
+
+  $txt =~ s/\n\z//;		# last newline
+  $txt .= "\n\n";
   }
 
 1;

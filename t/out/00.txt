@@ -12,8 +12,7 @@ But this isn't.
 * short items
 * and a very long item that contains a lot of silly text and spans more than one line
 
-Some more text in a long paragraph that also
-spans more than one line.
+Some more text in a long paragraph that also spans more than one line.
 
 ----
 

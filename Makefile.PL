@@ -35,6 +35,7 @@ WriteMakefile(
     VERSION_FROM      => 'lib/Convert/Wiki.pm',
     PREREQ_PM         => {
 	Test::Differences => 0.47,
+	Text::Format => 0.52,
 	},
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/Convert/Wiki.pm', # retrieve abstract from module

@@ -35,3 +35,11 @@ Revision history for Perl extension Convert::Wiki.
   * txt2wiki: add pod with instructions and synopsis
   * Node: add interlink()
   * supports (inter)linking phrases and URls
+
+2004-12-26 v0.05 Tels 83 tests
+  * linking phrases at the very start of a node was broken (this
+    also broke linking entire headlines)
+  * use Text::Format: remove linebreaks from paragraphs, and then rewrap them
+    for output. This also fixes links in paragraphs were the phrase spans
+    multiple lines.
+

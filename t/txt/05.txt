@@ -2,6 +2,8 @@
 Headline
 ===============
 
+Long interlinking example.
+
  - bullet one
  - bullet Two
 
@@ -13,3 +15,6 @@ Something inside a word: barfoo. foober.
  No interlinks here: Foo and baz.
 
 A web link: bloodgate.com.
+
+This paragraph has an example that spans
+multiple lines.

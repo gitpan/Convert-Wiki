@@ -11,7 +11,7 @@ use warnings;
 
 use vars qw/$VERSION/;
 
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 #############################################################################
 
@@ -117,7 +117,7 @@ sub interlink
       # no /g, since we want to interlink the phrase only once per paragraph
       # XXX TODO: this will turn "foo" into [[foo[[bar]]]] when searching
       # for bar after "foobar|foo"
-      $txt =~ s/([^a-z])($p)([^a-z]|$)/ "${1}[[$target" . ( ($2 eq $phrase && $2 eq $target) ? '' : "|$2") . "]]$3"/ie;
+      $txt =~ s/([^a-z]|^)($p)([^a-z]|$)/ "${1}[[$target" . ( ($2 eq $phrase && $2 eq $target) ? '' : "|$2") . "]]$3"/ie;
       }
     }
   $txt;
