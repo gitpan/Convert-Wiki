@@ -16,9 +16,20 @@ use vars qw/$VERSION @ISA/;
 
 @ISA = qw/Convert::Wiki::Node/;
 
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 #############################################################################
+
+sub _init
+  {
+  my ($self,$args) = @_;
+
+  $self->SUPER::_init($args);
+
+  $self->{txt} .= "\n\n";
+
+  $self;
+  }
 
 1;
 __END__

@@ -1,0 +1,6 @@
+One
+two
+more
+Foobar|foo
+Barbar|baz
+http://bloodgate.com/|bloodgate.com

@@ -16,21 +16,27 @@ use vars qw/$VERSION @ISA/;
 
 @ISA = qw/Convert::Wiki::Node/;
 
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 #############################################################################
 
-sub as_wiki
+sub _as_wiki
   {
-  my $self = shift;
+  my ($self,$txt) = @_;
 
   # " Foo bar is baz.\n Baz.\n"
  
-  my $txt = $self->{txt};
-
   $txt =~ s/\n/\n /g;
 
   ' ' . $txt . "\n\n";
+  }
+
+sub interlink
+  {
+  # no interlinking in monospaced paragraphs!
+  my ($self, $wiki) = @_;
+
+  $self->{txt};
   }
 
 1;

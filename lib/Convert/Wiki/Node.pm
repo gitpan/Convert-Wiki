@@ -11,7 +11,7 @@ use warnings;
 
 use vars qw/$VERSION/;
 
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 #############################################################################
 
@@ -77,12 +77,50 @@ sub _init
   $self;
   }
 
+sub _as_wiki
+  {
+  my ($self,$txt) = @_;
+
+  $txt;
+  }
+
 sub as_wiki
   {
-  my $self = shift;
+  my ($self, $wiki) = @_;
 
-  # For paragraphs. For others, will be overwritten in subclass.
-  $self->{txt} . "\n\n";
+  $self->_as_wiki( $self->interlink($wiki) );
+  }
+
+sub interlink
+  {
+  # turn text in pragraph into links
+  my ($self, $wiki) = @_;
+
+  my $txt = $self->{txt};
+  # for all phrases, find them case-insensitive, then link them
+  for my $link (@{$wiki->{interlink}})
+    {
+    # turn "Foo" into "Foo|Foo"
+    $link .= '|' . $link unless $link =~ /\|/;
+    # split "Foobar|Foo" into "Foobar", "Foo"
+    my ($target, $phrase) = split /\|/, $link;
+
+    my $p = quotemeta(lc($phrase));
+
+    if ($target =~ /^[a-z]+:/)
+      {
+      $txt =~ s/([^a-z])($p)([^a-z]|$)/${1}[$target ${2}]$3/i;
+
+      }
+    else
+      {
+      # no /g, since we want to interlink the phrase only once per paragraph
+      # XXX TODO: this will turn "foo" into [[foo[[bar]]]] when searching
+      # for bar after "foobar|foo"
+      $txt =~ s/([^a-z])($p)([^a-z]|$)/ "${1}[[$target" . ( ($2 eq $phrase && $2 eq $target) ? '' : "|$2") . "]]$3"/ie;
+      }
+    }
+  $txt;
   }
 
 sub error
@@ -184,9 +222,11 @@ Returns the last error message, or '' for no error.
 
 =head2 as_wiki()
 
-	my $txt = $node->as_wiki();
+	my $txt = $node->as_wiki($wiki);
 
-Return the contents of the node as wiki code.
+Return the contents of the node as wiki code. The parameter C<$wiki> is the
+Convert::Wiki object the node belongs to. It can be used to access parameters
+like C<interlink>.
 
 =head2 type()
 

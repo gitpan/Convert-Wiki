@@ -67,14 +67,9 @@ Some text in a paragraph. and some more and more and more.
 HERE
 ;
 
+$wiki = Convert::Wiki->new( );
+
 is ($wiki->from_txt($txt), $wiki, 'from_txt');
 
 is ($wiki->nodes(), 4, '4 nodes');
-
-
-
-
-
-
-
 

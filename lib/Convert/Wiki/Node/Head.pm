@@ -15,7 +15,7 @@ use Convert::Wiki::Node;
 use vars qw/$VERSION @ISA/;
 
 @ISA = qw/Convert::Wiki::Node/;
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 #############################################################################
 
@@ -28,9 +28,9 @@ sub _init
   $self->SUPER::_init($args);
   }
 
-sub as_wiki
+sub _as_wiki
   {
-  my $self = shift;
+  my ($self,$txt) = @_;
 
   # if we are the first headline, we get level 1
   if (!defined $self->prev_by_type('head'))
@@ -47,7 +47,7 @@ sub as_wiki
   my $p = '=' x ($self->{level} + 1);		# level 1: ==
 
   # "== Foo ==\n\n"
-  $p . ' ' . $self->{txt} . ' ' . $p . "\n\n";
+  $p . ' ' . $txt . ' ' . $p . "\n\n";
   }
 
 1;

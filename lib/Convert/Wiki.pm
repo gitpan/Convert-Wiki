@@ -11,7 +11,7 @@ use warnings;
 
 use vars qw/$VERSION/;
 
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 use Convert::Wiki::Node;
 
@@ -132,7 +132,7 @@ sub as_wiki
   my $node = $self->{nodes};
   while (defined $node)
     {
-    $wiki .= $node->as_wiki();
+    $wiki .= $node->as_wiki($self);
     $node = $node->{next};
     }
   $wiki;
@@ -200,6 +200,13 @@ following are valid:
 	debug		if set, will enable some debug outputs
 	interlink	a list of phrases, that if found in a paragraph,
 			are turned into links (into the same Wiki)
+
+The phrases in interlink are searched case-sensitive, and if the found phrase
+differs from the searched one, a piped link will be generated. In addition, you
+can give a different link target and link name by separating them with C< | >:
+
+	Foo		# turn "foo" into "[[Foo|foo]]", "Foo" into [Foo] etc
+	Foobar|foo	# find "foo", "Foo" etc. and makes them [[Foobar|foo]]
 
 =head2 as_txt()
 

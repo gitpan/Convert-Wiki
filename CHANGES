@@ -29,3 +29,9 @@ Revision history for Perl extension Convert::Wiki.
     headline right after another headline)
   * use _remove_me() to remove "line" nodes right at start and for
     headlines
+
+2004-12-26 v0.04 Tels 83 tests
+  * txt2wiki: add command line options: debug, interlink, input, output
+  * txt2wiki: add pod with instructions and synopsis
+  * Node: add interlink()
+  * supports (inter)linking phrases and URls
