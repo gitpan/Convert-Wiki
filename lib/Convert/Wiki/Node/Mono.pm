@@ -1,10 +1,10 @@
 #############################################################################
 # (c) by Tels 2004.
 #
-# represents a headline node
+# represents monospaced text blocks (aka <pre>)
 #############################################################################
 
-package Convert::Wiki::Node::Head;
+package Convert::Wiki::Node::Mono;
 
 use 5.006001;
 use strict;
@@ -15,27 +15,22 @@ use Convert::Wiki::Node;
 use vars qw/$VERSION @ISA/;
 
 @ISA = qw/Convert::Wiki::Node/;
-$VERSION = '0.02';
+
+$VERSION = '0.01';
 
 #############################################################################
-
-sub _init
-  {
-  my ($self,$args) = @_;
-
-  $self->{level} ||= 1; 
-
-  $self->SUPER::_init($args);
-  }
 
 sub as_wiki
   {
   my $self = shift;
 
-  my $p = '=' x ($self->{level} + 1);		# level 1: ==
+  # " Foo bar is baz.\n Baz.\n"
+ 
+  my $txt = $self->{txt};
 
-  # "== Foo ==\n\n"
-  $p . ' ' . $self->{txt} . ' ' . $p . "\n\n";
+  $txt =~ s/\n/\n /;
+
+  ' ' . $txt . "\n\n";
   }
 
 1;
@@ -43,19 +38,20 @@ __END__
 
 =head1 NAME
 
-Convert::Wiki::Node::Head - Represents a headline node
+Convert::Wiki::Node::Item - Represents an item in a list (aka <li> or *)
 
 =head1 SYNOPSIS
 
-	use Convert::Wiki::Node::Head;
+	use Convert::Wiki::Node::Item;
 
-	my $head = Convert::Wiki::Node->new( txt => 'About Foo', type => 'head1' );
+	my $para = Convert::Wiki::Node->new( txt => 'Foo is a foobar.', type => 'item' );
 
-	print $head->as_wiki();
+	print $para->as_wiki();		# print something like "* Foo is a foorbar\n"
 
 =head1 DESCRIPTION
 
-A C<Convert::Wiki::Node::Head> represents a headline node in a text.
+A C<Convert::Wiki::Node::Item> represents an item in a list (aka the equivalent of
+C<< <li> >> or C<*>.
 
 =head2 EXPORT
 
@@ -63,7 +59,7 @@ None by default.
 
 =head1 SEE ALSO
 
-The base class L<Convert::Wiki::Node>.
+L<Convert::Wiki::Node>.
 
 =head1 AUTHOR
 

@@ -11,7 +11,7 @@ use warnings;
 
 use vars qw/$VERSION/;
 
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 #############################################################################
 
@@ -21,6 +21,8 @@ sub new
 
   my $args = $_[0];
   $args = { @_ } if ref($args) ne 'HASH';
+  
+  my $self = bless {}, $class;
 
   # XXX TODO check arguments
  
@@ -28,14 +30,19 @@ sub new
     { 
     my $type = ucfirst($args->{type});
     $type = 'Para' if $type eq 'Paragraph';
-  
-    $class .= '::' . $type;
-    if ($class =~ /(\d)\z/)
+
+    if ($type =~ /(\d)\z/)
       {
       # convert XX9 => XX (for Head1 etc)
       $args->{level} = abs($1 || 1);
-      $class =~ s/\d\z//;
+      $type =~ s/\d\z//;
       }
+
+    $self->error('Node type must be one of Head, Item, Mono, Line or Para but is \'' . $type . "'") and return $self
+      unless $type =~ /^(Head|Item|Line|Mono|Para)\z/;
+
+    $class .= '::' . $type;
+    $self = bless $self, $class;	# rebless
     }
 
   if ($class ne __PACKAGE__)
@@ -44,8 +51,6 @@ sub new
     $pm .= '.pm';
     require $pm;			# XXX not very portable I am afraid
     }
-
-  my $self = bless {}, $class;
 
   $self->_init($args);
   }
@@ -74,13 +79,14 @@ sub as_wiki
   my $self = shift;
 
   # For paragraphs. For others, will be overwritten in subclass.
-  $self->{txt} . "\n";
+  $self->{txt} . "\n\n";
   }
 
 sub error
   {
   my $self = shift;
 
+  $self->{error} = $_[0] if defined $_[0];
   $self->{error};
   }
 
@@ -113,6 +119,28 @@ Convert::Wiki::Node - Represents a node (headline, paragraph etc) in a text
 A C<Convert::Wiki::Node> represents a node (headline, paragraph etc) in a
 text. All the nodes together represent the entire document.
 
+=head1 METHODS
+
+=head2 error()
+
+	$last_error = $cvt->error();
+
+	$cvt->error($error);			# set new messags
+	$cvt->error('');			# clear error
+
+Returns the last error message, or '' for no error.
+
+=head2 as_wiki()
+
+	my $txt = $node->as_wiki();
+
+Return the contents of the node as wiki code.
+
+=head2 type()
+
+	my $type = $node->type();
+
+Returns the type of the node as string.
 =head2 EXPORT
 
 None by default.

@@ -1,10 +1,10 @@
 #############################################################################
 # (c) by Tels 2004.
 #
-# represents a text paragraph node
+# represents an item in a list (aka <li> or *)
 #############################################################################
 
-package Convert::Wiki::Node::Para;
+package Convert::Wiki::Node::Item;
 
 use 5.006001;
 use strict;
@@ -20,24 +20,38 @@ $VERSION = '0.01';
 
 #############################################################################
 
+sub as_wiki
+  {
+  my $self = shift;
+
+  # "* Foo bar is baz.\n"
+  my $trailing = "\n";
+
+  # for long entries, add a newline to separate them
+  $trailing .= "\n" if length($self->{txt}) >= 80;
+
+  '* ' . $self->{txt} . $trailing;
+  }
+
 1;
 __END__
 
 =head1 NAME
 
-Convert::Wiki::Node::Para - Represents a text paragraph node
+Convert::Wiki::Node::Item - Represents an item in a list (aka <li> or *)
 
 =head1 SYNOPSIS
 
-	use Convert::Wiki::Node::Para;
+	use Convert::Wiki::Node::Item;
 
-	my $para = Convert::Wiki::Node->new( txt => 'Foo is a foobar.', type => 'para' );
+	my $para = Convert::Wiki::Node->new( txt => 'Foo is a foobar.', type => 'item' );
 
-	print $para->as_wiki();
+	print $para->as_wiki();		# print something like "* Foo is a foorbar\n"
 
 =head1 DESCRIPTION
 
-A C<Convert::Wiki::Node::Para> represents a text paragraph node in a text.
+A C<Convert::Wiki::Node::Item> represents an item in a list (aka the equivalent of
+C<< <li> >> or C<*>.
 
 =head2 EXPORT
 

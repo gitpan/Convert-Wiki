@@ -6,3 +6,15 @@ Revision history for Perl extension Convert::Wiki.
   * basicobject/code structure and layout is there, plus tests and some doc
   * examples/txt2wiki
 
+2004-12-24 v0.02 Tels 52 tests
+  * first working version that can actually convert a txt file
+  * add doc about METHODS and examples in pm files
+  * Wiki: add docs about internal workings
+  * Wiki: implement from_txt(), as_wiki() and clear(), debug()
+  * Wiki: from_txt() calls clear prior to taking input
+  * Wiki, Node: error() can set a new error message
+  * Node: add types "mono", "line" and "item"
+  * Node: complain about unknown types
+  * added Item.pm, Line.pm, Mono.pm
+  * Wiki: added options 'debug' and 'interlink' (not working yet)
+

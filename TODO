@@ -1,7 +1,12 @@
 
-TODO List for Convert::Wiki.
+TODO List for Convert::Wiki:
 
-* add txt input filtering
-* add lists, indended paragraphs, monospaced (pre)
-* add a testsuite with various examples
+* better txt input filtering (definition lists, tables etc)
+* add table support (for tab-delimited txt tables)
+* add a improved testsuite with various examples
+* implement Node::prev() and Node::next() to get newlines under
+  control (add a newline before headline if prev node is not a
+  headline)
+* implement interlinking (once per "area after headline", "once per
+  paragraph" and always)
 

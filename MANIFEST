@@ -7,11 +7,17 @@ SIGNATURE
 TODO
 t/wikipm.t
 t/head.t
-t/para.t
+t/item.t
+t/line.t
 t/node.t
+t/mono.t
+t/para.t
 examples/txt2wiki
 lib/Convert/Wiki.pm
 lib/Convert/Wiki/Node.pm
 lib/Convert/Wiki/Node/Head.pm
+lib/Convert/Wiki/Node/Item.pm
+lib/Convert/Wiki/Node/Line.pm
+lib/Convert/Wiki/Node/Mono.pm
 lib/Convert/Wiki/Node/Para.pm
 META.yml                                 Module meta-data (added by MakeMaker)

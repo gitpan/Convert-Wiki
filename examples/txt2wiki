@@ -3,6 +3,7 @@
 BEGIN
   {
   use lib '../lib';			# if run with module not yet installed
+  chdir 'examples' if -d 'examples';	# wrong dir?
   $|++;					# buffer off
   }
 

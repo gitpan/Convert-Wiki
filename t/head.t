@@ -19,8 +19,8 @@ is (ref($node), $c);
 
 is ($node->error(), '', 'no error yet');
 
-is ($node->as_wiki(), "==  ==\n", 'empty headline');
+is ($node->as_wiki(), "==  ==\n\n", 'empty headline');
 
-my $node = $c->new( txt => 'Foo' );
-is ($node->as_wiki(), "== Foo ==\n", '== Foo ==');
+$node = $c->new( txt => 'Foo' );
+is ($node->as_wiki(), "== Foo ==\n\n", '== Foo ==');
 
