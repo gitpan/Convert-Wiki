@@ -18,3 +18,14 @@ Revision history for Perl extension Convert::Wiki.
   * added Item.pm, Line.pm, Mono.pm
   * Wiki: added options 'debug' and 'interlink' (not working yet)
 
+2004-12-25 v0.03 Tels 82 tests
+  * License is GPL
+  * Wiki: add nodes()
+  * Node: add link(), next(), prev(), prev_by_type()
+  * Wiki: moved from_txt() to Convert/Wiki/Txt.pm
+  * fixes a lot in text recognition code that broke many simple examples
+  * use Test::Differences for some generic text => wiki tests
+  * use prev_by_type() to correct levels of headlines (first headline,
+    headline right after another headline)
+  * use _remove_me() to remove "line" nodes right at start and for
+    headlines

@@ -1,5 +1,5 @@
 #############################################################################
-# (c) by Tels 2004.
+# (c) by Tels 2004. Part of Convert::Wiki
 #
 # represents a headline node
 #############################################################################
@@ -15,7 +15,7 @@ use Convert::Wiki::Node;
 use vars qw/$VERSION @ISA/;
 
 @ISA = qw/Convert::Wiki::Node/;
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 #############################################################################
 
@@ -31,6 +31,18 @@ sub _init
 sub as_wiki
   {
   my $self = shift;
+
+  # if we are the first headline, we get level 1
+  if (!defined $self->prev_by_type('head'))
+    {
+    $self->{level} = 1;
+    }
+  # if we follow right on another headline, take it's level plus 1
+  my $prev = $self->prev();
+  if (defined $prev && $prev->type() eq 'head')
+    {
+    $self->{level} = $prev->{level} + 1;
+    }
 
   my $p = '=' x ($self->{level} + 1);		# level 1: ==
 
@@ -57,7 +69,7 @@ Convert::Wiki::Node::Head - Represents a headline node
 
 A C<Convert::Wiki::Node::Head> represents a headline node in a text.
 
-=head2 EXPORT
+=head1 EXPORT
 
 None by default.
 
@@ -74,6 +86,6 @@ Tels L<http://bloodgate.com>
 Copyright (C) 2004 by Tels
 
 This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+it under the terms of the GPL. See the LICENSE file for more details.
 
 =cut

@@ -1,5 +1,5 @@
 #############################################################################
-# (c) by Tels 2004.
+# (c) by Tels 2004. Part of Convert::Wiki
 #
 # represents an item in a list (aka <li> or *)
 #############################################################################
@@ -16,7 +16,7 @@ use vars qw/$VERSION @ISA/;
 
 @ISA = qw/Convert::Wiki::Node/;
 
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 #############################################################################
 
@@ -27,8 +27,9 @@ sub as_wiki
   # "* Foo bar is baz.\n"
   my $trailing = "\n";
 
-  # for long entries, add a newline to separate them
-  $trailing .= "\n" if length($self->{txt}) >= 80;
+  # add a new line if the next node is not an item
+  my $next = $self->{next};
+  $trailing .= "\n" if defined $next && $next->type() ne 'item';
 
   '* ' . $self->{txt} . $trailing;
   }
@@ -53,7 +54,7 @@ Convert::Wiki::Node::Item - Represents an item in a list (aka <li> or *)
 A C<Convert::Wiki::Node::Item> represents an item in a list (aka the equivalent of
 C<< <li> >> or C<*>.
 
-=head2 EXPORT
+=head1 EXPORT
 
 None by default.
 
@@ -70,6 +71,6 @@ Tels L<http://bloodgate.com>
 Copyright (C) 2004 by Tels
 
 This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+it under the terms of the GPL. See the LICENSE file for more details.
 
 =cut

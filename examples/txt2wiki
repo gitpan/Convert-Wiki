@@ -9,7 +9,11 @@ BEGIN
 
 use Convert::Wiki;
 
-my $cvt = Convert::Wiki->new();		# create conversion object
+my $debug = shift || 0;
+
+my $cvt = Convert::Wiki->new(
+  debug => $debug,	
+  );					# create conversion object
 
 local $/ = undef;			# slurp mode
 $cvt->from_txt( <> );			# read in input from stdin

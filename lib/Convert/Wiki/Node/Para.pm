@@ -1,5 +1,5 @@
 #############################################################################
-# (c) by Tels 2004.
+# (c) by Tels 2004. Part of Convert::Wiki
 #
 # represents a text paragraph node
 #############################################################################
@@ -37,9 +37,9 @@ Convert::Wiki::Node::Para - Represents a text paragraph node
 
 =head1 DESCRIPTION
 
-A C<Convert::Wiki::Node::Para> represents a text paragraph node in a text.
+A C<Convert::Wiki::Node::Para> represents a normal text paragraph.
 
-=head2 EXPORT
+=head1 EXPORT
 
 None by default.
 
@@ -56,6 +56,6 @@ Tels L<http://bloodgate.com>
 Copyright (C) 2004 by Tels
 
 This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+it under the terms of the GPL. See the LICENSE file for more details.
 
 =cut

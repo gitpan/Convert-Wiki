@@ -1,5 +1,5 @@
 #############################################################################
-# (c) by Tels 2004.
+# (c) by Tels 2004. Part of Convert::Wiki
 #
 # represents a horizontal line (or ruler)
 #############################################################################
@@ -15,13 +15,27 @@ use Convert::Wiki::Node;
 use vars qw/$VERSION @ISA/;
 
 @ISA = qw/Convert::Wiki::Node/;
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 #############################################################################
 
 sub as_wiki
   {
   "----\n\n";
+  }
+
+sub _remove_me
+  {
+  # if we are the first node, or a headline follows us, skip
+  my $self = shift;
+
+  my $next = $self->next();
+
+  if (!defined $self->prev() || (defined $next && $next->type() =~ /head/))
+    {
+    return 1;
+    }
+  0;
   }
 
 1;
@@ -43,7 +57,7 @@ Convert::Wiki::Node::Line - Represents a horizontal line (aka ruler)
 
 A C<Convert::Wiki::Node::Line> represents a horizontal line (aka ruler).
 
-=head2 EXPORT
+=head1 EXPORT
 
 None by default.
 
@@ -60,6 +74,6 @@ Tels L<http://bloodgate.com>
 Copyright (C) 2004 by Tels
 
 This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+it under the terms of the GPL. See the LICENSE file for more details.
 
 =cut

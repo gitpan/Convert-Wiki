@@ -1,5 +1,5 @@
 #############################################################################
-# (c) by Tels 2004.
+# (c) by Tels 2004. Part of Convert::Wiki
 #
 # represents monospaced text blocks (aka <pre>)
 #############################################################################
@@ -16,7 +16,7 @@ use vars qw/$VERSION @ISA/;
 
 @ISA = qw/Convert::Wiki::Node/;
 
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 #############################################################################
 
@@ -28,7 +28,7 @@ sub as_wiki
  
   my $txt = $self->{txt};
 
-  $txt =~ s/\n/\n /;
+  $txt =~ s/\n/\n /g;
 
   ' ' . $txt . "\n\n";
   }
@@ -38,22 +38,21 @@ __END__
 
 =head1 NAME
 
-Convert::Wiki::Node::Item - Represents an item in a list (aka <li> or *)
+Convert::Wiki::Node::Mono - Represents a monospaced text block
 
 =head1 SYNOPSIS
 
-	use Convert::Wiki::Node::Item;
+	use Convert::Wiki::Node::Mono;
 
-	my $para = Convert::Wiki::Node->new( txt => 'Foo is a foobar.', type => 'item' );
+	my $para = Convert::Wiki::Node->new( txt => 'Foo is a foobar.', type => 'mono' );
 
-	print $para->as_wiki();		# print something like "* Foo is a foorbar\n"
+	print $para->as_wiki();		# print something like " Foo is a foorbar\n"
 
 =head1 DESCRIPTION
 
-A C<Convert::Wiki::Node::Item> represents an item in a list (aka the equivalent of
-C<< <li> >> or C<*>.
+A C<Convert::Wiki::Node::Mono> represents an monospaced textblock.
 
-=head2 EXPORT
+=head1 EXPORT
 
 None by default.
 
@@ -70,6 +69,6 @@ Tels L<http://bloodgate.com>
 Copyright (C) 2004 by Tels
 
 This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+it under the terms of the GPL. See the LICENSE file for more details.
 
 =cut

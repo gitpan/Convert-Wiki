@@ -1,5 +1,5 @@
 #############################################################################
-# (c) by Tels 2004.
+# (c) by Tels 2004. Part of Convert::Wiki
 #
 #############################################################################
 
@@ -70,6 +70,9 @@ sub _init
 
   $self->{txt} =~ s/\n+\z//;		# remove trailing newline
   $self->{txt} =~ s/^\n+//;		# remove newlines at start
+  
+  $self->{prev} = undef;
+  $self->{next} = undef;
 
   $self;
   }
@@ -94,8 +97,57 @@ sub type
   {
   my $self = shift;
 
+  # XXX head1 => head
   my $type = ref($self); $type =~ s/.*:://;		# only last part
   lc($type);						# head, para, node etc
+  }
+
+sub prev_by_type
+  {
+  # find a previous node with a certain type
+  my ($self,$type) = @_;
+
+  my $prev = $self->{prev};
+
+#  print "Looking for '$type'\n";
+#  print "# At $prev $prev->{type}\n" if defined $prev;
+
+  while (defined $prev && $prev->{type} !~ /$type/)
+    {
+    $prev = $prev->{prev};
+#    print "# At $prev $prev->{type}\n" if defined $prev;
+    }
+  # found something, or hit the first node (aka undef)
+  $prev;
+  }
+
+sub prev
+  {
+  my $self = shift;
+
+  $self->{prev}
+  }
+
+sub next
+  {
+  my $self = shift;
+
+  $self->{next};
+  }
+
+sub link
+  {
+  my $self = shift;
+
+  $self->{next} = $_[0];
+  $self->{next}->{prev} = $self;
+
+  $self;
+  }
+
+sub _remove_me
+  {
+  0;
   }
 
 1;
@@ -141,11 +193,45 @@ Return the contents of the node as wiki code.
 	my $type = $node->type();
 
 Returns the type of the node as string.
-=head2 EXPORT
+
+=head2 prev()
+
+	my $prev = $node->prev();
+
+Get the node's previous node.
+
+=head2 prev_by_type
+
+	my $prev = $node->prev_by_type( $type );
+
+Find a previous node with a certain type, for instance 'head' or 'line'.
+
+=head2 next()
+
+	my $next = $node->next();
+
+Get the node's next node.
+
+=head2 link()
+
+	$node->link( $other );
+
+Set C<$node>'s next node to C<$other> and set C<$other>s prev to C< $node >.
+
+=head2 _remove_me()
+
+	$rc = $node->_remove_me();
+
+Internally called by Convert::Wiki to fix up the nodes after the first pass.
+A true return value indicates that this node must be removed entirely.
+
+=head1 EXPORT
 
 None by default.
 
 =head1 SEE ALSO
+
+L<Convert::Wiki>.
 
 =head1 AUTHOR
 
@@ -156,6 +242,6 @@ Tels L<http://bloodgate.com>
 Copyright (C) 2004 by Tels
 
 This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+it under the terms of the GPL. See the LICENSE file for more details.
 
 =cut
